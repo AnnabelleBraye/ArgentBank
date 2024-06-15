@@ -24,9 +24,6 @@
     "server": "node ./server/server.js"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
-    "nodemon": "^2.0.4",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3"
+    "nodemon": "^2.0.4"
   }
 }
