@@ -1,7 +1,14 @@
+import Hero from '../../components/Home/Hero';
+import Features from '../../components/Home/Features';
+import { Fragment } from 'react/jsx-runtime';
+
 const Home = () => {
   return (
-    <div className="flex justify-center text-red-400">ArgentBank</div>
-  )
+    <Fragment>
+      <Hero />
+      <Features />
+    </Fragment>
+  );
 }
 
-export default Home
+export default Home;
