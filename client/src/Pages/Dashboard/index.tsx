@@ -1,17 +1,25 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../userSlice.tsx';
-import { RootState } from '../../store';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store.ts';
 import ArgentBank, { ArgentBankProps } from '../../components/ArgentBank';
-
+import { useEffect } from 'react';
+import { getProfileThunk } from '../../store/userSlice.tsx';
+import Modal from '../../components/Modal/index.tsx';
+import Loader from '../../components/Loader/index.tsx';
 
 const Dashboard = () => {
-  const user = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const userSelector = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const userToken = userSelector.userToken;
+  const isTokenAvalaible = Boolean(userToken);
+  const isDataReady = userSelector.user?.firstName || userSelector.user?.lastName;
 
-  const handleSignOut = () => {
-    dispatch(logout());
-    window.location.href = '/';
-  };
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getProfileThunk({token: userToken}));
+    }
+  }, [dispatch, userToken]);
 
   const argentBank: ArgentBankProps[] = [{
     title: 'Argent Bank Checking (x8349)',
@@ -27,16 +35,45 @@ const Dashboard = () => {
     balance: 'Current Balance'
   }]
 
+  const handleCloseModal = () => {
+    setIsOpened(false);
+  }
+
   return (
-    <div className='flex flex-col items-center bg-dark-blue flex-1 text-white'>
-      <div className="mb-8">
-        <h1 className='text-3.5xl font-bold my-4 leading-tight'>Welcome back<br />{user.name} !</h1>
-        <button className="bg-blue-green font-bold p-2.5 text-sm border-solid border-2 border-l-blue-green border-t-blue-green border-b-blue-green-border border-r-blue-green-border leading-none">Edit Name</button>
-      </div>
-      {argentBank.map((bank, index) => (
-        <ArgentBank key={index} title={bank.title} money={bank.money} balance={bank.balance} />
-      ))}
-    </div>
+    <React.Fragment>
+        {isTokenAvalaible?
+          <React.Fragment>
+            <div className={`flex flex-col items-center bg-dark-blue flex-1 text-white`}>
+              {userSelector.isLoading || !isDataReady ? (
+                <div className='flex items-center h-screen text-center flex-1'>
+                  <div className='h-full'>
+                    <Loader />
+                  </div>
+                </div>
+              ) : (
+                <React.Fragment>
+                  <div className="mb-8">
+                    <h1 className='text-3.5xl font-bold my-4 leading-tight'>Welcome back<br />{userSelector.user.firstName} {userSelector.user.lastName} !</h1>
+                    <button
+                      onClick={() => setIsOpened(true)}
+                      className="bg-blue-green font-bold p-2.5 text-sm border-solid border-2 border-l-blue-green border-t-blue-green border-b-blue-green-border border-r-blue-green-border leading-none">
+                        Edit Name
+                    </button>
+                  </div>
+                  {argentBank.map((bank, index) => (
+                    <ArgentBank key={index} title={bank.title} money={bank.money} balance={bank.balance} />
+                  ))}
+                  
+                  <div className={`w-full absolute ${isOpened ? 'backdrop-blur-sm bg-dark-blue/40' : ''}`}>
+                    <Modal isOpened={isOpened} closeModal={handleCloseModal} />
+                  </div>
+                </React.Fragment>
+              )}
+            </div>
+          </React.Fragment> :
+          <div className='h-screen mt-16'>Votre session a expiré, veuillez vous reconnecter.</div>
+      }
+    </React.Fragment>
   );
 }
 

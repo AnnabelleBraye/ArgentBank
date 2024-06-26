@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice.tsx';
+import authReducer from './authSlice.tsx';
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     user: userReducer,
+    // [userApi.reducerPath]: userApi.reducer, // Ajoutez le reducer généré par RTK Query à votre store
   },
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
 });
 
 // Get the type of our store variable

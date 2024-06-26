@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './store/store';
 
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
@@ -25,7 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Dashboard />} />
+          <Route path="/profile" element={<Dashboard />} />
         </Routes>
         <Footer />
       </Router>

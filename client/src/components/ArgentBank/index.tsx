@@ -10,10 +10,13 @@ const ArgentBank = ({title, money, balance}: ArgentBankProps) => {
       <div className='flex flex-col'>
         <h3 className="font-normal">{title}</h3>
         <p className="text-4.5xl leading-none font-bold m-0">{money}</p>
-        <p className="m-0 leading-6">{balance}</p>
+        <p className="m-0 leading-5">{balance}</p>
       </div>
       <div className="self-start medium:self-center">
-        <button className="w-50 bg-blue-green text-white text-lg font-bold p-2 mt-4 border-2 border-l-blue-green border-t-blue-green border-b-blue-green-border border-r-blue-green-border leading-5">View transactions</button>
+        <button
+          className="w-50 bg-blue-green text-white text-lg font-bold p-2 mt-4 border-2 border-l-blue-green border-t-blue-green border-b-blue-green-border border-r-blue-green-border leading-5">
+            View transactions
+          </button>
       </div>
     </section>
   )
