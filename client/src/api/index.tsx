@@ -58,6 +58,6 @@ export const updateUser = async ({
     body: JSON.stringify({ firstName, lastName }),
   });
 
-  const updatedProfileData = await response.json();
-  return updatedProfileData;
+  const data = await response.json();
+  return data;
 };
