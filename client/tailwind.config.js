@@ -28,6 +28,9 @@ export default {
         '75': '300px', 
         '100': '400px', 
       },
+      minHeight: {
+        '100': '400px',
+      },
       width: {
         '25': '100px',
         '50': '200px',
