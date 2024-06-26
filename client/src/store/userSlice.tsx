@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import UserType from '../models/user';
-import { editUser, getUser } from '../api';
+import { updateUser, getUser } from '../api';
 import { RootState } from './store';
 
 type UserState = {
@@ -30,7 +30,7 @@ export const editProfileThunk = createAsyncThunk(
       firstName : firstName,
       lastName : lastName
     }
-    const res = await editUser(userData)
+    const res = await updateUser(userData)
 
     return res.body 
 })
@@ -69,6 +69,7 @@ const userSlice = createSlice({
     .addCase(editProfileThunk.fulfilled, (state,action) => {
         state.isError = false
         state.isLoading = false
+        console.log(action.payload);
         state.user.firstName = action.payload.firstName;
         state.user.lastName = action.payload.lastName;
         state.user.email = action.payload.email;
