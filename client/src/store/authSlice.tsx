@@ -18,6 +18,11 @@ const initialState: State = {
   errorMessage: '',
 }
 
+/**
+ * Thunk to login user
+ * @param0 Object witch containes user email and user password
+ * returns User Token
+ */
 export const loginUserThunk = createAsyncThunk<
   string, 
   {email: string, password: string}, 
@@ -28,6 +33,7 @@ export const loginUserThunk = createAsyncThunk<
     try {
       const token = await userLogin({ email, password });
       thunkApi.dispatch(setToken(token));
+
       return token;
     } catch (err) {
       return thunkApi.rejectWithValue((err as Error).message);

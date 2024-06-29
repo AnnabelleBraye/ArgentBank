@@ -1,5 +1,10 @@
 const apiUrl = 'http://localhost:3001/api/v1'
 
+/**
+ * Api call to log user
+ * @param param0 User informations to login (email and password)
+ * @returns User token
+ */
 export const userLogin = async ({
   email,
   password
@@ -25,6 +30,11 @@ export const userLogin = async ({
   return data.body.token;
 };
 
+/**
+ * Api call to get user profile
+ * @param token User token
+ * @returns User data
+ */
 export const getUser = async (token: string) => {
   const response = await fetch(`${apiUrl}/user/profile`, {
     method: "POST",
@@ -35,11 +45,14 @@ export const getUser = async (token: string) => {
 
   const data = await response.json();
 
-  console.log('data', data);
-
   return data;
 };
 
+/**
+ * Api call to update user data
+ * @param param0 Object witch contains user token, user firstName and user lastName
+ * @returns User updated
+ */
 export const updateUser = async ({
   token,
   firstName,

@@ -22,6 +22,28 @@ const initialState: UserState = {
   isError: false
 }
 
+/**
+ * Thunk to get user profile
+ * @param param0 Object witch contains user token
+ * @returns The response body
+ */
+export const getProfileThunk = createAsyncThunk<
+  string, 
+  {token: string},
+  {state: RootState}
+>(
+  "profile",
+  async ({token}: {token: string}) => {
+    const res = await getUser(token)
+
+    return res.body;
+})
+
+/**
+ * Thunk to edit user profile
+ * @param param0 Object witch contains user token, user firstName and user lastName
+ * @returns The response body
+ */
 export const editProfileThunk = createAsyncThunk(
   "profile",
   async ({ token, firstName, lastName }: { token: string, firstName: string, lastName: string}) => {
@@ -33,18 +55,6 @@ export const editProfileThunk = createAsyncThunk(
     const res = await updateUser(userData)
 
     return res.body 
-})
-
-export const getProfileThunk = createAsyncThunk<
-  string, 
-  {token: string},
-  {state: RootState}
->(
-  "profile",
-  async ({token}: {token: string}) => {
-    const res = await getUser(token)
-
-    return res.body;
 })
 
 const userSlice = createSlice({
