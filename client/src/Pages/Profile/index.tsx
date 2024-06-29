@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store.ts';
-import ArgentBank, { ArgentBankProps } from '../../components/ArgentBank';
+import ArgentBank, { ArgentBankProps } from '../../components/ArgentBank/index.tsx';
 import { useEffect } from 'react';
 import { getProfileThunk } from '../../store/userSlice.tsx';
 import Modal from '../../components/Modal/index.tsx';
 import Loader from '../../components/Loader/index.tsx';
 
-const Dashboard = () => {
+const Profile = () => {
   const userSelector = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -77,4 +77,4 @@ const Dashboard = () => {
   );
 }
 
-export default Dashboard;
+export default Profile;
