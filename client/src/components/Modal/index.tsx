@@ -29,10 +29,10 @@ const Modal = ({ isOpened, closeModal }: ModalProps) => {
     closeModal();
   }
   return (
-    <div className={`w-3/5 h-screen m-auto ${isOpened ? 'flex flex-col items-center justify-center' : 'hidden'}`}>
+    <div className={`w-5/6 h-screen m-auto ${isOpened ? 'flex flex-col items-center justify-center' : 'hidden'} sm:w-3/5`}>
       <div className="bg-white w-full h-3/5 mx-auto p-4 rounded-lg text-black">
         <form className="flex flex-col gap-4 h-full">
-          <div className="flex justify-between mb-4 h-auto">
+          <div className="flex justify-between items-center mb-4 h-auto">
             <h2 className="text-2xl font-bold">Edit user info</h2>
             <button 
               type="button" 

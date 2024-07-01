@@ -14,6 +14,7 @@ export default {
         'dark-grey': '#222',
       },
       screens: {
+        'xs': '340px',
         'medium': '720px',
         'large': '920px',
       },

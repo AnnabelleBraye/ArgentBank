@@ -20,24 +20,24 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center py-1.5 px-5">
+    <nav className="flex justify-between items-center py-1.5 px-2 sm:px-5">
       <Link className="flex items-center" to="/">
         <img className="max-w-full w-50" src="/src/assets/images/argentBankLogo.png" alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
         {userToken ? (
-          <div>
+          <div className='flex gap-2 text-sm  xs:text-normal'>
             <Link
-              className={`font-bold text-blue-grey mr-2 ${location.pathname === '/profile' ? 'underline' : ''}`}
+              className={`font-bold text-blue-grey ${location.pathname === '/profile' ? 'underline' : ''}`}
               to="/profile"
             >
-              <span className='mr-2'>
-                <FontAwesomeIcon icon={faCircleUser} /> Profile
+              <span className='flex items-center'>
+                <FontAwesomeIcon icon={faCircleUser} /><span className='hidden xs:ml-1 sm:ml-2 xs:block'>Profile</span>
               </span>
             </Link>
-            <Link className="font-bold text-blue-grey mr-2" to="/sign-in">
-              <span onClick={handleSignOut}>
-                <FontAwesomeIcon icon={faRightFromBracket} /> Sign out
+            <Link className="font-bold text-blue-grey" to="/sign-in">
+              <span className='flex items-center' onClick={handleSignOut}>
+                <FontAwesomeIcon icon={faRightFromBracket} /><span className='hidden xs:ml-1 sm:ml-2 xs:block'>Sign out</span>
               </span>
             </Link>
           </div>

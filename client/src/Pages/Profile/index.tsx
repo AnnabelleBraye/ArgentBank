@@ -64,9 +64,11 @@ const Profile = () => {
                     <ArgentBank key={index} title={bank.title} money={bank.money} balance={bank.balance} />
                   ))}
                   
-                  <div className={`w-full absolute ${isOpened ? 'backdrop-blur-sm bg-dark-blue/40' : ''}`}>
-                    <Modal isOpened={isOpened} closeModal={handleCloseModal} />
-                  </div>
+                  {isOpened && (
+                    <div className="fixed inset-0 backdrop-blur-sm bg-dark-blue/40 flex items-center justify-center">
+                      <Modal isOpened={isOpened} closeModal={handleCloseModal} />
+                    </div>
+                  )}
                 </React.Fragment>
               )}
             </div>
